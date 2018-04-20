@@ -25,6 +25,12 @@ Soft Proposal Networks for Weakly Supervised Object Localization, ICCV 2017.
     cd SPN.pytorch/spnlib
     bash make.sh
     ```
+    FATAL: add /usr/local/cuda/bin/nvcc to system path
+    ``` bash 
+    vi /usr/local/cuda/bin/nvcc
+    export PATH=$PATH:/usr/local/cuda/bin
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-7.5/lib
+    ```
 
 4. Run the training demo: 
     ```bash
