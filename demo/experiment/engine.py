@@ -100,7 +100,7 @@ class Engine(object):
         if not os.path.exists(self.state['save_model_path']):
             os.makedirs(self.state['save_model_path'])
         filename = os.path.join(self.state['save_model_path'], 'model.pth.tar')
-        for imsize in scales:
+        for imsize in scales:     # why do this?
             self.state = deepcopy(src_state)
             self.state['image_size'] = int(imsize)
             model.load_state_dict(src_state_dict)
