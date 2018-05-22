@@ -9,10 +9,25 @@ from .modules import SoftProposal
 
 # helper functions
 
+'''
+可能原因：
+1.  没有删除spatial pooling layer
+    导致hook错误
+2.  可能在shallow classifier之前需要做一次softproposal
+'''
+
 def hook_spn(model):
     if not (hasattr(model, 'sp_hook') and hasattr(model, 'fc_hook')):
         model._training = model.training
         model.train(False)
+        
+        print(self.parent_modules[0])
+        print(type(self.parent_modules[0]))
+
+        # hook作用为保留某一层的参数，提取某一层的输出、参数、梯度信息，用于前向传播和后向传播时注册钩子，保存参数
+        # 每次前向传播执行结束后会执行钩子函数（hook）。前向传播的钩子函数具有如下形式：hook(module, input, output) -> None，
+        # 而反向传播则具有如下形式：hook(module, grad_input, grad_output) -> Tensor or None
+        # 用法： 参数=要获取参数的层.register_forward_hook(hook函数)
         
         def _sp_hook(self, input, output):
             self.parent_modules[0].class_response_maps = output
@@ -34,6 +49,7 @@ def hook_spn(model):
             raise RuntimeError('Invalid SPN model')
         else:
             sp_layer.parent_modules = [model]
+            
             fc_layer.parent_modules = [model]
             model.sp_hook = sp_layer.register_forward_hook(_sp_hook)
             model.fc_hook = fc_layer.register_forward_hook(_fc_hook)
@@ -145,6 +161,7 @@ def object_localization(models, input, **kwargs):
 
     # enable spn inference mode
     if force_inference: 
+        print(k,v for k,v in models.items())
         models = {k:hook_spn(v) for k, v in models.items()}
 
     # localize objects

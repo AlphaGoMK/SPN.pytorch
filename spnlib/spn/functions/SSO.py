@@ -10,7 +10,8 @@ class SpatialSumOverMapFunc(Function):
     def forward(self, input):
         batch_size, num_channels, h, w = input.size()
         x = input.view(batch_size, num_channels, h*w)
-        output = torch.sum(x, 2)
+        output = torch.sum(x, 2)    # sum spatial feature map N * N to 1 dimension, sum all N x N feature map
+                                    # [torch.cuda.FloatTensor of size 16x1024 (GPU 0)]
         self.save_for_backward(input)
         return output.view(batch_size, num_channels)
 

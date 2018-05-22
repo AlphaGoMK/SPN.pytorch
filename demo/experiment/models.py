@@ -21,10 +21,12 @@ class SPNetWSL(nn.Module):
         self.image_normalization_mean = [103.939, 116.779, 123.68]
 
     def forward(self, x): 
-        x = self.features(x)
-        x = self.spatial_pooling(x)
-        x = x = x.view(x.size(0), -1)
-        x = self.classifier(x)
+        x = self.features(x)    # 除去最后一层的VGG16, feature
+        # [torch.cuda.FloatTensor of size 16x512x18x18 (GPU 0)]
+	x = self.spatial_pooling(x)     [torch.cuda.FloatTensor of size 16x1024 (GPU 0)]        
+        x = x = x.view(x.size(0), -1)   # batch size * channel dimension
+                                        # [torch.cuda.FloatTensor of size 16x1024 (GPU 0)]
+        x = self.classifier(x)          # fc layer
         return x
 
 def vgg16_sp(num_classes, pretrained=True, num_maps=1024):

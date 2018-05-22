@@ -53,6 +53,9 @@ class Engine(object):
         if self._state('use_pb') is None:
             self.state['use_pb'] = True
 
+        if self._state('loss_rate') is None:
+            self.state['loss_rate']=0.5
+
     def _state(self, name):
         if name in self.state:
             return self.state[name]
@@ -84,8 +87,10 @@ class Engine(object):
             target_var.volatile = True
 
         # compute output
-        self.state['output'] = model(input_var)
-        self.state['loss'] = criterion(self.state['output'], target_var)
+        self.state['shallow_output'],self.state['output'] = model(input_var)
+
+        # add 
+        self.state['loss'] = self.state['loss_rate']*criterion(self.state['output'], target_var)+(1-self.state['loss_rate'])*criterion(self.state['shallow_output'],target_var)
 
         if training:
             optimizer.zero_grad()
@@ -100,7 +105,7 @@ class Engine(object):
         if not os.path.exists(self.state['save_model_path']):
             os.makedirs(self.state['save_model_path'])
         filename = os.path.join(self.state['save_model_path'], 'model.pth.tar')
-        for imsize in scales:     # why do this?
+        for imsize in scales:
             self.state = deepcopy(src_state)
             self.state['image_size'] = int(imsize)
             model.load_state_dict(src_state_dict)

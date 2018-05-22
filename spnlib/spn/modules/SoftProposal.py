@@ -33,6 +33,7 @@ class SoftProposal(nn.Module):
 
     def forward(self, input):
         if self.nBatch != input.size(0) or self.mW != input.size(2) or self.mH != input.size(3):
+            
             self.lazyInit(input)
 
         return sp_generate(input, self.distanceMetric, self.transferMatrix, self.proposal, self.proposalBuffer, self.factor, self.couple)

@@ -66,6 +66,7 @@ class SPGenerate(Function):
             self.mH,
             self.N)
 
+    # what does input refer to?
     def forward(self, input):
         assert 'cuda' in input.type(), 'CPU version is currently not implemented'
         
@@ -95,6 +96,10 @@ class SPGenerate(Function):
             output = self.proposal.clone()
 
         self.save_for_backward(input)
+        print('SPG')
+        print(output.size)
+        # [torch.cuda.FloatTensor of size 16x1024x7x7 (GPU 0)]
+        # batch_size x channel x N x N
         return output
 
     def backward(self, grad_output):

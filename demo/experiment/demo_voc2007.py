@@ -30,6 +30,8 @@ parser.add_argument('--resume', default=None, type=str, metavar='PATH',
                     help='path to latest checkpoint (default: none)')
 parser.add_argument('-e', '--evaluate', dest='evaluate', action='store_true',
                     help='evaluate model on validation set')
+parser.add_argument('--loss-rate',default=0.5,type=float,metavar='N')
+
  
 def main_voc2007():
     global args, best_prec1, use_gpu 
@@ -51,7 +53,7 @@ def main_voc2007():
 
     state = {'batch_size': args.batch_size, 'max_epochs': args.epochs, 
             'image_size': args.image_size, 'evaluate': args.evaluate, 'resume': args.resume,
-             'lr':args.lr, 'momentum':args.momentum, 'weight_decay':args.weight_decay}
+             'lr':args.lr, 'momentum':args.momentum, 'weight_decay':args.weight_decay, 'loss_rate':args.loss_rate}
     state['difficult_examples'] = True
     state['save_model_path'] = 'logs/voc2007/'
 
