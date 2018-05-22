@@ -23,7 +23,7 @@ class SPNetWSL(nn.Module):
     def forward(self, x): 
         x = self.features(x)    # 除去最后一层的VGG16, feature
         # [torch.cuda.FloatTensor of size 16x512x18x18 (GPU 0)]
-	x = self.spatial_pooling(x)     [torch.cuda.FloatTensor of size 16x1024 (GPU 0)]        
+	x = self.spatial_pooling(x)     # [torch.cuda.FloatTensor of size 16x1024 (GPU 0)]        
         x = x = x.view(x.size(0), -1)   # batch size * channel dimension
                                         # [torch.cuda.FloatTensor of size 16x1024 (GPU 0)]
         x = self.classifier(x)          # fc layer
