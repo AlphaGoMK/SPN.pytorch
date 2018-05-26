@@ -6,6 +6,15 @@ Soft Proposal Networks for Weakly Supervised Object Localization, ICCV 2017.
 
 [[Torch code]](https://github.com/ZhouYanzhao/SPN)  
 
+## Thoughts
+1. 采用只有224x224的random crop训练可以提升point accuracy但仍然很低
+2. load model时选择更小的image-size
+3. 尝试较浅层网络，太深层网络的proposal可能效果不太好
+4. loss无法收敛：random crop image size从112->224时，产生Loss的gap，且无法收敛
+
+## Bugs
+1. image-size 224x224时不输出 trainLoss,trainMAP,testLoss,testMAP
+
 ## Requirements
 [Conda virtual environment](https://conda.io/docs/user-guide/tasks/manage-environments.html) is recommended: `conda env create -f environment.yml`
 
