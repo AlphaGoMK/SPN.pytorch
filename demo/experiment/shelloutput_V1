@@ -1,0 +1,324 @@
+[dataset] read ../data/voc/files/VOC2007/classification_trainval.csv
+[dataset] VOC 2007 classification set=trainval number of classes=20  number of images=5011
+[dataset] read ../data/voc/files/VOC2007/classification_test.csv
+[dataset] VOC 2007 classification set=test number of classes=20  number of images=4952
+SPNetWSL(
+  (features): Sequential(
+    (0): Conv2d (3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace)
+    (2): Conv2d (64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (3): ReLU(inplace)
+    (4): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), dilation=(1, 1))
+    (5): Conv2d (64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (6): ReLU(inplace)
+    (7): Conv2d (128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (8): ReLU(inplace)
+    (9): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), dilation=(1, 1))
+    (10): Conv2d (128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (11): ReLU(inplace)
+    (12): Conv2d (256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace)
+    (14): Conv2d (256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (15): ReLU(inplace)
+    (16): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), dilation=(1, 1))
+    (17): Conv2d (256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (18): ReLU(inplace)
+    (19): Conv2d (512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (20): ReLU(inplace)
+    (21): Conv2d (512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (22): ReLU(inplace)
+    (23): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), dilation=(1, 1))
+    (24): Conv2d (512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (25): ReLU(inplace)
+    (26): Conv2d (512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (27): ReLU(inplace)
+    (28): Conv2d (512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (29): ReLU(inplace)
+  )
+  (classifier): Sequential(
+    (0): Dropout(p=0.5)
+    (1): Linear(in_features=1024, out_features=20)
+  )
+  (shallow_classifier): Sequential(
+    (0): Dropout(p=0.5)
+    (1): Linear(in_features=1024, out_features=20)
+  )
+  (downsampling): Sequential(
+    (0): BasicConv(
+      (conv): Conv2d (512, 1024, kernel_size=(3, 3), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (1): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(3, 3), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (2): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(3, 3), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+  )
+  (vertical_conv1): Sequential(
+    (0): BasicConv(
+      (conv): Conv2d (512, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (1): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (2): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (3): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+  )
+  (downsampling2): Sequential(
+    (0): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(3, 3), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (1): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(3, 3), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (2): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(3, 3), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+  )
+  (vertical2_conv1): Sequential(
+    (0): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (1): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (2): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+    (3): BasicConv(
+      (conv): Conv2d (1024, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.01, affine=True)
+      (relu): ReLU(inplace)
+    )
+  )
+  (sp_module): Sequential(
+    (adconv): Conv2d (3072, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=2)
+    (maps): ReLU()
+    (sp): SoftProposal([couple=True,factor=None])
+  )
+  (sso_module): Sequential(
+    (sso): SpatialSumOverMap
+  )
+  (shallow_sso): Sequential(
+    (sso): SpatialSumOverMap
+  )
+)
+Scale: 112	 Epoch: [0]	 trainLoss 0.2256	 trainMAP 12.999
+testLoss 0.2166	 testMAP 17.998
+ *** best=17.998
+Scale: 112	 Epoch: [1]	 trainLoss 0.2004	 trainMAP 19.648
+testLoss 0.1884	 testMAP 29.931
+ *** best=29.931
+Scale: 112	 Epoch: [2]	 trainLoss 0.1821	 trainMAP 27.357
+testLoss 0.1687	 testMAP 37.139
+ *** best=37.139
+Scale: 112	 Epoch: [3]	 trainLoss 0.1697	 trainMAP 33.052
+testLoss 0.1612	 testMAP 44.315
+ *** best=44.315
+Scale: 112	 Epoch: [4]	 trainLoss 0.1623	 trainMAP 37.531
+testLoss 0.1462	 testMAP 48.246
+ *** best=48.246
+Scale: 112	 Epoch: [5]	 trainLoss 0.1524	 trainMAP 44.006
+testLoss 0.1423	 testMAP 51.551
+ *** best=51.551
+Scale: 112	 Epoch: [6]	 trainLoss 0.1481	 trainMAP 46.935
+testLoss 0.1455	 testMAP 50.370
+ *** best=51.551
+Scale: 112	 Epoch: [7]	 trainLoss 0.1421	 trainMAP 49.913
+testLoss 0.1442	 testMAP 53.578
+ *** best=53.578
+Scale: 112	 Epoch: [8]	 trainLoss 0.1345	 trainMAP 54.073
+testLoss 0.1409	 testMAP 55.566
+ *** best=55.566
+Scale: 112	 Epoch: [9]	 trainLoss 0.1315	 trainMAP 55.922
+testLoss 0.1307	 testMAP 60.077
+ *** best=60.077
+update learning rate
+0.001
+Scale: 112	 Epoch: [10]	 trainLoss 0.1087	 trainMAP 68.624
+testLoss 0.1096	 testMAP 67.112
+ *** best=67.112
+Scale: 112	 Epoch: [11]	 trainLoss 0.1012	 trainMAP 72.069
+testLoss 0.1081	 testMAP 67.840
+ *** best=67.840
+Scale: 112	 Epoch: [12]	 trainLoss 0.0968	 trainMAP 72.601
+testLoss 0.1075	 testMAP 68.468
+ *** best=68.468
+Scale: 112	 Epoch: [13]	 trainLoss 0.0932	 trainMAP 74.432
+testLoss 0.1060	 testMAP 69.006
+ *** best=69.006
+Scale: 112	 Epoch: [14]	 trainLoss 0.0911	 trainMAP 76.139
+testLoss 0.1054	 testMAP 69.821
+ *** best=69.821
+Scale: 112	 Epoch: [15]	 trainLoss 0.0878	 trainMAP 76.921
+testLoss 0.1041	 testMAP 69.863
+ *** best=69.863
+Scale: 112	 Epoch: [16]	 trainLoss 0.0840	 trainMAP 78.272
+testLoss 0.1053	 testMAP 70.072
+ *** best=70.072
+Scale: 112	 Epoch: [17]	 trainLoss 0.0825	 trainMAP 79.635
+testLoss 0.1047	 testMAP 70.317
+ *** best=70.317
+Scale: 112	 Epoch: [18]	 trainLoss 0.0797	 trainMAP 80.697
+testLoss 0.1064	 testMAP 70.738
+ *** best=70.738
+Scale: 112	 Epoch: [19]	 trainLoss 0.0762	 trainMAP 82.064
+testLoss 0.1049	 testMAP 70.773
+ *** best=70.773
+save model logs/voc2007/model.pth.tar
+Scale: 224	 Epoch: [0]	 trainLoss 2.0252	 trainMAP 7.425
+testLoss 1.9565	 testMAP 7.391
+ *** best=7.391
+Scale: 224	 Epoch: [1]	 trainLoss 2.0150	 trainMAP 7.427
+testLoss 1.9565	 testMAP 7.331
+ *** best=7.391
+Scale: 224	 Epoch: [2]	 trainLoss 2.0141	 trainMAP 7.469
+testLoss 1.9565	 testMAP 7.331
+ *** best=7.391
+Scale: 224	 Epoch: [3]	 trainLoss 2.0137	 trainMAP 7.486
+testLoss 1.9565	 testMAP 7.316
+ *** best=7.391
+Scale: 224	 Epoch: [4]	 trainLoss 2.0146	 trainMAP 7.434
+testLoss 1.9565	 testMAP 7.325
+ *** best=7.391
+Scale: 224	 Epoch: [5]	 trainLoss 2.0146	 trainMAP 7.542
+testLoss 1.9565	 testMAP 7.325
+ *** best=7.391
+Scale: 224	 Epoch: [6]	 trainLoss 2.0146	 trainMAP 7.415
+testLoss 1.9565	 testMAP 7.327
+ *** best=7.391
+Scale: 224	 Epoch: [7]	 trainLoss 2.0150	 trainMAP 7.371
+testLoss 1.9565	 testMAP 7.320
+ *** best=7.391
+Scale: 224	 Epoch: [8]	 trainLoss 2.0150	 trainMAP 7.339
+testLoss 1.9565	 testMAP 7.317
+ *** best=7.391
+Scale: 224	 Epoch: [9]	 trainLoss 2.0141	 trainMAP 7.509
+testLoss 1.9565	 testMAP 7.319
+ *** best=7.391
+update learning rate
+0.001
+Scale: 224	 Epoch: [10]	 trainLoss 2.0155	 trainMAP 7.428
+testLoss 1.9565	 testMAP 7.338
+ *** best=7.391
+Scale: 224	 Epoch: [11]	 trainLoss 2.0146	 trainMAP 7.421
+testLoss 1.9565	 testMAP 7.344
+ *** best=7.391
+Scale: 224	 Epoch: [12]	 trainLoss 2.0146	 trainMAP 7.479
+testLoss 1.9565	 testMAP 7.374
+ *** best=7.391
+Scale: 224	 Epoch: [13]	 trainLoss 2.0141	 trainMAP 7.466
+testLoss 1.9565	 testMAP 7.385
+ *** best=7.391
+Scale: 224	 Epoch: [14]	 trainLoss 2.0141	 trainMAP 7.581
+testLoss 1.9565	 testMAP 7.335
+ *** best=7.391
+Scale: 224	 Epoch: [15]	 trainLoss 2.0137	 trainMAP 7.421
+testLoss 1.9565	 testMAP 7.398
+ *** best=7.398
+Scale: 224	 Epoch: [16]	 trainLoss 2.0141	 trainMAP 7.431
+testLoss 1.9565	 testMAP 7.351
+ *** best=7.398
+Scale: 224	 Epoch: [17]	 trainLoss 2.0141	 trainMAP 7.483
+testLoss 1.9565	 testMAP 7.378
+ *** best=7.398
+Scale: 224	 Epoch: [18]	 trainLoss 2.0150	 trainMAP 7.488
+testLoss 1.9565	 testMAP 7.338
+ *** best=7.398
+Scale: 224	 Epoch: [19]	 trainLoss 2.0150	 trainMAP 7.436
+testLoss 1.9565	 testMAP 7.345
+ *** best=7.398
+save model logs/voc2007/model.pth.tar
+Scale: 560	 Epoch: [0]	 trainLoss 4.5151	 trainMAP 7.449
+testLoss 4.4217	 testMAP 7.497
+ *** best=7.497
+Scale: 560	 Epoch: [1]	 trainLoss 4.4772	 trainMAP 7.553
+testLoss 4.4217	 testMAP 7.570
+ *** best=7.570
+Scale: 560	 Epoch: [2]	 trainLoss 4.4772	 trainMAP 7.591
+testLoss 4.4217	 testMAP 7.594
+ *** best=7.594
+Scale: 560	 Epoch: [3]	 trainLoss 4.4758	 trainMAP 7.499
+testLoss 4.4217	 testMAP 7.564
+ *** best=7.594
+Scale: 560	 Epoch: [4]	 trainLoss 4.4763	 trainMAP 7.487
+testLoss 4.4217	 testMAP 7.557
+ *** best=7.594
+Scale: 560	 Epoch: [5]	 trainLoss 4.4772	 trainMAP 7.610
+testLoss 4.4217	 testMAP 7.555
+ *** best=7.594
+Scale: 560	 Epoch: [6]	 trainLoss 4.4758	 trainMAP 7.570
+testLoss 4.4217	 testMAP 7.566
+ *** best=7.594
+Scale: 560	 Epoch: [7]	 trainLoss 4.4776	 trainMAP 7.529
+testLoss 4.4217	 testMAP 7.555
+ *** best=7.594
+Scale: 560	 Epoch: [8]	 trainLoss 4.4758	 trainMAP 7.559
+testLoss 4.4217	 testMAP 7.553
+ *** best=7.594
+Scale: 560	 Epoch: [9]	 trainLoss 4.4758	 trainMAP 7.507
+testLoss 4.4217	 testMAP 7.554
+ *** best=7.594
+update learning rate
+0.001
+Scale: 560	 Epoch: [10]	 trainLoss 4.4767	 trainMAP 7.561
+testLoss 4.4217	 testMAP 7.475
+ *** best=7.594
+Scale: 560	 Epoch: [11]	 trainLoss 4.4763	 trainMAP 7.450
+testLoss 4.4217	 testMAP 7.514
+ *** best=7.594
+Scale: 560	 Epoch: [12]	 trainLoss 4.4772	 trainMAP 7.507
+testLoss 4.4217	 testMAP 7.470
+ *** best=7.594
+Scale: 560	 Epoch: [13]	 trainLoss 4.4763	 trainMAP 7.457
+testLoss 4.4217	 testMAP 7.476
+ *** best=7.594
+Scale: 560	 Epoch: [14]	 trainLoss 4.4763	 trainMAP 7.513
+testLoss 4.4217	 testMAP 7.486
+ *** best=7.594
+Scale: 560	 Epoch: [15]	 trainLoss 4.4767	 trainMAP 7.495
+testLoss 4.4217	 testMAP 7.511
+ *** best=7.594
+Scale: 560	 Epoch: [16]	 trainLoss 4.4754	 trainMAP 7.527
+testLoss 4.4217	 testMAP 7.464
+ *** best=7.594
+Scale: 560	 Epoch: [17]	 trainLoss 4.4763	 trainMAP 7.524
+testLoss 4.4217	 testMAP 7.497
+ *** best=7.594
+Scale: 560	 Epoch: [18]	 trainLoss 4.4767	 trainMAP 7.540
+testLoss 4.4217	 testMAP 7.467
+ *** best=7.594
+Scale: 560	 Epoch: [19]	 trainLoss 4.4763	 trainMAP 7.459
+testLoss 4.4217	 testMAP 7.465
+ *** best=7.594
+save model logs/voc2007/model.pth.tar
