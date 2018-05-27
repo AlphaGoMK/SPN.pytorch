@@ -6,6 +6,16 @@ Soft Proposal Networks for Weakly Supervised Object Localization, ICCV 2017.
 
 [[Torch code]](https://github.com/ZhouYanzhao/SPN)  
 
+## Experiments
+### upsample with bn
+* image size=112,           pa=10.59
+* image size=224,           pa=34.17
+
+### upsample without bn
+* image size=112,224,560,   pa=21
+* image size=224,           pa=27.52
+
+
 ## Thoughts
 1. 采用只有224x224的random crop训练可以提升point accuracy但仍然很低 (21->34.17)
 2. load model时选择更小的image-size
